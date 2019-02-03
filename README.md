@@ -4,23 +4,29 @@ nabla-base
 This is a common template or interface for you to start building your own nabla
 container image.
 
-Checkout [nabla containers](https://github.com/nabla-containers) and in
+Check out [nabla containers](https://github.com/nabla-containers) and in
 particular [runnc](https://github.com/nabla-containers/runnc).
 
 ### How to
 
 In order to build a docker image for nabla containers, we have to build:
-
-1. the nabla toolstack
-2. the unikernel image
-3. the docker image
-
+- the nabla toolstack
+- the unikernel image
+- the docker image
 
 #### Build the nabla toolstack
 
 There's an informative blog post on how to build the nabla rumprun toolstack
-[here](http://blog.cloudkernels.net/posts/building-nabla-aarch64/)
+[here](https://blog.cloudkernels.net/posts/building-nabla-aarch64/). If you clone a more recent branch, the process should be as easy as the following:
 
+```
+git clone https://github.com/cloudkernels/rumprun
+git submodule update --init
+make
+. obj/config-PATH.sh
+```
+
+and you should end up with the toolstack (${ARCH}-rumprun-netbsd-) in your PATH variable.
 
 Alternatively you can use one of the (unofficial) docker images with the
 toolstack embedded at /usr/local:
@@ -82,7 +88,7 @@ Copy the spt file in this directory and run:
 docker build -f Dockerfile -t myprog-nabla:${ARCH} .
 ```
 
-You should come up with a local docker image named myprog-nabla, tagged with
+You should end up with a local docker image named myprog-nabla, tagged with
 your current architecture variant (x86_64 or aarch64).
 
 Assuming you have setup [runnc](https://github.com/nabla-containers/runnc)
